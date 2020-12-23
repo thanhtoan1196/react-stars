@@ -97,6 +97,14 @@ function ReactStars(props) {
         setHalfStarHidden(props.isHalf && props.value % 1 < 0.5);
     }, []);
 
+    // to rerender component when props.value changes
+    (0, _react.useEffect)(function () {
+        validateInitialValue(props.value, props.count);
+        setStars(getStars(props.value));
+        setHalfStarAt(Math.floor(props.value));
+        setHalfStarHidden(props.isHalf && props.value % 1 < 0.5);
+    }, [props.value]);
+
     function validateInitialValue(value, count) {
         if (value < 0 || value > count) {
             setCurrentValue(0);
